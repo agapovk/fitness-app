@@ -1,7 +1,12 @@
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { getExercises, getWorkout, getWorkouts } from "@/data/data";
+import {
+  getCategories,
+  getExercises,
+  getWorkout,
+  getWorkouts,
+} from "@/data/data";
 import { ChevronLeftIcon } from "lucide-react";
 import Link from "next/link";
 import EditWorkout from "./components/EditWorkout";
@@ -16,6 +21,7 @@ export default async function page({ params }: Props) {
   const workout = await getWorkout(params.id);
   const workouts = await getWorkouts();
   const exercises = await getExercises();
+  const categories = await getCategories();
 
   if (!workout)
     return (
@@ -44,6 +50,7 @@ export default async function page({ params }: Props) {
         workout={workout}
         workouts={workouts}
         exercises={exercises}
+        categories={categories}
       />
     </>
   );

@@ -30,7 +30,7 @@ export default function AddExistedExerciseToWorkout({
   }
   return (
     <div className="flex flex-col items-center gap-4">
-      <div className="max-h-[80vh] overflow-scroll rounded-md border p-4">
+      <div className="max-h-[80vh] w-full overflow-scroll rounded-md border p-4">
         <ul className="flex flex-col gap-3">
           {exercisesWithoutCurrnetWorkout.map((exercise) => (
             <li
@@ -44,11 +44,10 @@ export default function AddExistedExerciseToWorkout({
                 height={50}
                 className="h-16 w-16 rounded-md"
               />
-              <div className="flex-1">
+              <div className="flex flex-1 flex-col gap-1">
                 <p className="font-semibold">{exercise.name}</p>
                 <p className="text-sm text-muted-foreground">
-                  In {exercise.workouts.length} workouts / TODO tooltip with
-                  workout badges
+                  In {exercise.workouts.length} workouts
                 </p>
               </div>
               <Button
