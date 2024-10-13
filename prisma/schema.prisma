@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  seed     = "prisma/seed.ts"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id        String    @id @default(uuid())
+  name      String
+  image     String    @default("/placeholder.svg")
+  workouts  Workout[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("categories")
+}
+
+model Workout {
+  id         String     @id @default(uuid())
+  name       String
+  image      String     @default("/placeholder.svg")
+  categoryId String
+  category   Category   @relation(fields: [categoryId], references: [id])
+  exercises  Exercise[]
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  @@map("workouts")
+}
+
+model Exercise {
+  id          String    @id @default(uuid())
+  name        String
+  image       String    @default("/placeholder.svg")
+  description String
+  workouts    Workout[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("exercises")
+}
